@@ -30,7 +30,7 @@ class Player:
         self.weakening_active = False
         self.weakening_timer = 0.0
         self.weakening_duration = 10.0  # How long to weaken attraction
-        self.velocity_boost_strength = 0.1  # From Java: vx = vx + 5
+        self.velocity_boost_strength = 0.5  # From Java: vx = vx + 5
         
         # Local minima detection
         self.position_history = []
@@ -149,19 +149,19 @@ class Player:
                 # Adjust forces based on minS (YOUR TWEAKED VALUES)
                 if minS < 5:
                     # Very blocked - weaken attraction, BOOST repulsion
-                    weakening_factor = minS / 500
-                    repulsion_boost = 3.0  # Triple repulsion strength
-                    influence_boost = 1.5  # 50% wider influence
+                    weakening_factor = minS / 50
+                    repulsion_boost = 1.0  # Triple repulsion strength
+                    influence_boost = 1.0  # 50% wider influence
                     print(f"Path VERY blocked! Attraction: {weakening_factor:.2f}x, Repulsion: {repulsion_boost:.1f}x, Range: {influence_boost:.1f}x")
                 elif minS < 50:
                     # Somewhat blocked - moderate adjustments
-                    weakening_factor = 0.00001
-                    repulsion_boost = 2.0  # Double repulsion strength
-                    influence_boost = 1.3  # 30% wider influence
+                    weakening_factor = 0.001
+                    repulsion_boost = 1.0  # Double repulsion strength
+                    influence_boost = 1.0  # 30% wider influence
                     print(f"Path blocked! Attraction: {weakening_factor:.2f}x, Repulsion: {repulsion_boost:.1f}x, Range: {influence_boost:.1f}x")
                 else:
                     # Clear path - normal forces
-                    weakening_factor = 0.005
+                    weakening_factor = 0.05
                     repulsion_boost = 1.0
                     influence_boost = 1.0
                     print(f"Path clear! Normal forces")
